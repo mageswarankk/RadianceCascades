@@ -1,4 +1,4 @@
-#version 330 core
+#version 430 core
 
 in vec2 uv;
 in vec4 color;
@@ -11,7 +11,7 @@ uniform vec2 u_lastMousePos;
 uniform int u_mouseClicked;
 uniform sampler2D u_canvasTexture;
 
-float brushRadius = 1.0f / min(u_resolution.x, u_resolution.y);
+float brushRadius = 0.5f / min(u_resolution.x, u_resolution.y);
 
 float distSquared(vec2 a, vec2 b) {
     vec2 d = a - b;
@@ -41,19 +41,17 @@ void main() {
     vec4 current = texture(u_canvasTexture, fixedUv);
 
     if (u_mouseClicked == 1) {
-        // Draw light
         if (sdfLineSquared(uv, u_lastMousePos, u_mousePos) <= brushRadius) {
             current = vec4(u_mousePos, 1.0f, 1.0f);
         }
     }
     else if (u_mouseClicked == 2) {
-        // Draw black
         if (sdfLineSquared(uv, u_lastMousePos, u_mousePos) <= brushRadius) {
             current = vec4(0.0f, 0.0f, 0.0f, 1.0f);
         }
     }
     else if (current.a < 0.1f && makeGrid(fixedUv)) {
-        current = vec4(vec3(0.0f), 1.0f);
+        current = vec4(vec3(0.0f), 0.0f); // 0.0f alpha temporary
     }
 
     FragColor = current;

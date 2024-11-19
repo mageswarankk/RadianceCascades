@@ -1,13 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\",
+  "WorkspaceRootPath": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\draw.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:draw.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -23,25 +19,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "draw.frag",
-              "DocumentMoniker": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\draw.frag",
-              "RelativeDocumentMoniker": "draw.frag",
-              "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\draw.frag",
-              "RelativeToolTip": "draw.frag",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABcAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-11-19T20:58:18.818Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\main.cpp",
+              "DocumentMoniker": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
-              "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\main.cpp",
+              "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAOEAAAAAAAAAAAAwwEABAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-19T13:22:44.385Z",
               "EditorCaption": ""

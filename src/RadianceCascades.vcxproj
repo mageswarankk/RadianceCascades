@@ -72,11 +72,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\mages\Documents\Research\Code\Libraries\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\mages\Documents\Research\Code\Projects\RadianceCascades\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\mages\Documents\Research\Code\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\mages\Documents\Research\Code\Libraries\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\mages\Documents\Research\Code\Projects\RadianceCascades\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\mages\Documents\Research\Code\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -155,6 +155,8 @@
     <None Include="draw.vert" />
     <None Include="jfa.frag" />
     <None Include="jfa.vert" />
+    <None Include="rc.frag" />
+    <None Include="rc.vert" />
     <None Include="render.frag" />
     <None Include="render.vert" />
     <None Include="uv.frag" />
