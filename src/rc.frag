@@ -69,8 +69,10 @@ vec4 raymarch() {
 }
 
 void main() {
-    if (distSquared(uv, u_mousePos) < brushRadius)
-        FragColor = vec4(u_mousePos, 1.0f, 1.0f);
+    if (distSquared(uv, u_mousePos) < brushRadius) {
+        vec2 fixedMousePos = (u_mousePos + 1.0f) / 2.0f;
+        FragColor = vec4(fixedMousePos, 1.0f, 1.0f);
+    }
     else 
         FragColor = raymarch();
 }

@@ -42,7 +42,8 @@ void main() {
 
     if (u_mouseClicked == 1) {
         if (sdfLineSquared(uv, u_lastMousePos, u_mousePos) <= brushRadius) {
-            current = vec4(u_mousePos, 1.0f, 1.0f);
+            vec2 fixedMousePos = (u_mousePos + 1.0f) / 2.0f;
+            current = vec4(fixedMousePos, 1.0f, 1.0f);
         }
     }
     else if (u_mouseClicked == 2) {
