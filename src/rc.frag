@@ -84,7 +84,13 @@ void main() {
     vec4 radiance = vec4(0.0f);
 
     vec4 canvasColor = texture(u_canvasTexture, fixedUv);
-    if (canvasColor.a > 0.1f) radiance = vec4(pow(canvasColor.rgb, vec3(2.2f)), 1.0f);
+
+    if (distSquared(u_mousePos, uv) < brushRadius) {
+        vec2 fixedMousePos = (u_mousePos + 1.0f) / 2.0f;
+        radiance = vec4(fixedMousePos, 1.0f, 1.0f);
+    }
+
+    else if (canvasColor.a > 0.1f) radiance = vec4(pow(canvasColor.rgb, vec3(2.2f)), 1.0f);
     
     else radiance = raymarch(u_rayCount, intervalStart, intervalEnd, effectiveUv, isLastLayer);
 
