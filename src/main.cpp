@@ -113,7 +113,7 @@ int main() {
 	glBindTexture(GL_TEXTURE_2D, canvasTexture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, canvasTexture, 0);
 	auto fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if (fboStatus != GL_FRAMEBUFFER_COMPLETE) {
@@ -129,7 +129,7 @@ int main() {
 	glBindTexture(GL_TEXTURE_2D, uvMapTexture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, uvMapTexture, 0);
 	fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if (fboStatus != GL_FRAMEBUFFER_COMPLETE) {
@@ -148,7 +148,7 @@ int main() {
 	glBindTexture(GL_TEXTURE_2D, jfaTexture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, jfaTexture, 0);
 	fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if (fboStatus != GL_FRAMEBUFFER_COMPLETE) {
@@ -159,7 +159,7 @@ int main() {
 	glBindTexture(GL_TEXTURE_2D, jfaTexture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, jfaTexture, 0);
 	fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if (fboStatus != GL_FRAMEBUFFER_COMPLETE) {
@@ -175,7 +175,8 @@ int main() {
 	glBindTexture(GL_TEXTURE_2D, distanceFieldTexture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
+
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, distanceFieldTexture, 0);
 	fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if (fboStatus != GL_FRAMEBUFFER_COMPLETE) {
@@ -187,39 +188,35 @@ int main() {
 	glGenFramebuffers(2, rcFramebuffers);
 	GLuint rcFBO_A = rcFramebuffers[0];
 	GLuint rcFBO_B = rcFramebuffers[1];
+
+	GLuint rcTextures[2];
+	glGenTextures(2, rcTextures);
+	GLuint rcTexture_A = rcTextures[0];
+	GLuint rcTexture_B = rcTextures[1];
+	
 	glBindFramebuffer(GL_FRAMEBUFFER, rcFBO_A);
-	GLuint rcTexture;
-	glGenTextures(1, &rcTexture);
 	glActiveTexture(GL_TEXTURE4);
-	glBindTexture(GL_TEXTURE_2D, rcTexture);
+	glBindTexture(GL_TEXTURE_2D, rcTexture_A);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rcTexture, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rcTexture_A, 0);
 	fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if (fboStatus != GL_FRAMEBUFFER_COMPLETE) {
 		std::cout << "Error: RC framebuffer A is not complete!" << std::endl;
 	}
+
 	glBindFramebuffer(GL_FRAMEBUFFER, rcFBO_B);
-	glActiveTexture(GL_TEXTURE4);
-	glBindTexture(GL_TEXTURE_2D, rcTexture);
+	glActiveTexture(GL_TEXTURE5);
+	glBindTexture(GL_TEXTURE_2D, rcTexture_B);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rcTexture, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rcTexture_B, 0);
 	fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if (fboStatus != GL_FRAMEBUFFER_COMPLETE) {
 		std::cout << "Error: RC framebuffer B is not complete!" << std::endl;
 	}
-
-	// Create texture to store the last frame (for radiance cascade algorithm)
-	GLuint lastTexture;
-	glGenTextures(1, &lastTexture);
-	glActiveTexture(GL_TEXTURE5);
-	glBindTexture(GL_TEXTURE_2D, lastTexture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -243,13 +240,16 @@ int main() {
 	GLuint u_resolution_rc = glGetUniformLocation(rcShader.ID, "u_resolution");
 	GLuint u_mousePos_rc = glGetUniformLocation(rcShader.ID, "u_mousePos");
 	GLuint u_mouseClick_rc = glGetUniformLocation(rcShader.ID, "u_mouseClicked");
+	GLuint u_baseRayCount_rc = glGetUniformLocation(rcShader.ID, "u_baseRayCount");
+	GLuint u_rayCount_rc = glGetUniformLocation(rcShader.ID, "u_rayCount");
 	GLuint u_canvasTexture_rc = glGetUniformLocation(rcShader.ID, "u_canvasTexture");
 	GLuint u_distanceFieldTexture_rc = glGetUniformLocation(rcShader.ID, "u_distanceFieldTexture");
 	GLuint u_lastTexture_rc = glGetUniformLocation(rcShader.ID, "u_lastTexture");
 
 	GLuint u_finalRender_render = glGetUniformLocation(renderShader.ID, "u_finalRender");
 
-	const int jfa_passes = std::ceil(std::log2(std::max(WINDOW_WIDTH, WINDOW_HEIGHT)));
+	const int jfa_passes = std::ceil(std::log2(std::max(WINDOW_WIDTH, WINDOW_HEIGHT))); // for jfa
+	const int baseRayCount = 16; // for rc
 
 	// BEGIN of main render loop
 	while (!glfwWindowShouldClose(window)) {
@@ -258,7 +258,6 @@ int main() {
 		// PASS 1: Render brush strokes to canvas texture
 		glBindTexture(GL_TEXTURE_2D, canvasTexture);
 		glBindFramebuffer(GL_FRAMEBUFFER, canvasFBO);
-
 		// We do not clear the buffer since we want to accumulate pixels on the canvas texture!
 
 		drawShader.activateShader();
@@ -292,7 +291,7 @@ int main() {
 		// PASS 3: Run the Jump Flood Algorithm to generate a distance UV map
 		glBindTexture(GL_TEXTURE_2D, jfaTexture);
 		glBindFramebuffer(GL_FRAMEBUFFER, jfaFBO_A);
-
+		
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
@@ -300,27 +299,28 @@ int main() {
 		glUniform2i(u_resolution_jfa, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 		GLuint currentInput = 1; // uvMapTexture
-		GLuint currentOutput = jfaFBO_A;
+		GLuint currentJfaFBO = jfaFBO_A;
+		GLuint lastJfaFBO = jfaFBO_B;
 
 		for (int i = 0; i < jfa_passes; i++) {
 			glUniform1i(u_inputTexture_jfa, currentInput);
 			glUniform1i(u_offset_jfa, std::pow(2, jfa_passes - i - 1));
 
-			glBindFramebuffer(GL_FRAMEBUFFER, currentOutput);
 			glBindTexture(GL_TEXTURE_2D, jfaTexture);
+			glBindFramebuffer(GL_FRAMEBUFFER, currentJfaFBO);
 
 			VAO.bindVAO();
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 			VAO.unbindVAO();
 
 			currentInput = 2; // jfaTexture
-			currentOutput = (currentOutput == jfaFBO_B ? jfaFBO_A : jfaFBO_B);
+			std::swap(currentJfaFBO, lastJfaFBO);
 		}
 		
 		// PASS 4: Create distance field from the output of the Jump Flood Algorithm
 		glBindTexture(GL_TEXTURE_2D, distanceFieldTexture);
 		glBindFramebuffer(GL_FRAMEBUFFER, distanceFieldFBO);
-
+		
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
@@ -332,10 +332,10 @@ int main() {
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		VAO.unbindVAO();
 
-		// PASS 5: Run the actual Radiance Cascade algorithm! (TODO)
-		glBindTexture(GL_TEXTURE_2D, rcTexture);
-		glBindFramebuffer(GL_FRAMEBUFFER, rcFBO_A);
-
+		// PASS 5: Radiance Cascade implementation
+		glBindTexture(GL_TEXTURE_2D, rcTextures[0]);
+		glBindFramebuffer(GL_FRAMEBUFFER, rcFramebuffers[0]);
+		
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
@@ -344,32 +344,57 @@ int main() {
 		glUniform2i(u_resolution_rc, WINDOW_WIDTH, WINDOW_HEIGHT);
 		glUniform2f(u_mousePos_rc, mouseX, mouseY);
 		glUniform1i(u_mouseClick_rc, mouseClicked);
+		glUniform1i(u_baseRayCount_rc, baseRayCount);
 		glUniform1i(u_canvasTexture_rc, 0);
 		glUniform1i(u_distanceFieldTexture_rc, 3);
-		glUniform1i(u_lastTexture_rc, 5);
 
-		VAO.bindVAO();
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		VAO.unbindVAO();
+		int prev = 0;
+		for (int i = 2; i >= 1; i--) {
+			int rayCount = std::pow(baseRayCount, i);
+			glUniform1i(u_rayCount_rc, rayCount);
 
-		// Copy rcTexture to lastTexture for the next frame
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glBindTexture(GL_TEXTURE_2D, lastTexture);
-		glCopyImageSubData(rcTexture, GL_TEXTURE_2D, 0, 0, 0, 0, lastTexture, GL_TEXTURE_2D, 0, 0, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, 1);
+			if (i > 1) {
+				glBindTexture(GL_TEXTURE_2D, rcTextures[prev]);
+				glBindFramebuffer(GL_FRAMEBUFFER, rcFramebuffers[prev]);
 
-		// PASS 6: Finally, render our final image to the default framebuffer
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+				glClear(GL_COLOR_BUFFER_BIT);
 
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+				VAO.bindVAO();
+				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+				VAO.unbindVAO();
 
-		renderShader.activateShader();
+				glUniform1i(u_lastTexture_rc, (prev == 0 ? 4 : 5));
+				prev = 1 - prev;
+			}
 
-		glUniform1i(u_finalRender_render, 4);
+			else {
+				glBindTexture(GL_TEXTURE_2D, 0);
+				glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-		VAO.bindVAO();
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		VAO.unbindVAO();
+				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+				glClear(GL_COLOR_BUFFER_BIT);
+
+				VAO.bindVAO();
+				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+				VAO.unbindVAO();
+			}
+		}
+
+		// PASS 6: Final render 
+		// glBindTexture(GL_TEXTURE_2D, 0);
+		// glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		//
+		// glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		// glClear(GL_COLOR_BUFFER_BIT);
+
+		// renderShader.activateShader();
+
+		// glUniform1i(u_finalRender_render, 4);
+
+		// VAO.bindVAO();
+		// glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		// VAO.unbindVAO();
 
 		// END of render loop
 

@@ -8,12 +8,14 @@ out vec4 FragColor;
 uniform ivec2 u_resolution;
 uniform vec2 u_mousePos;
 uniform int u_mouseClicked;
+uniform int u_baseRayCount;
+uniform int u_rayCount;
 uniform sampler2D u_canvasTexture;
 uniform sampler2D u_distanceFieldTexture;
 uniform sampler2D u_lastTexture;
 
 #define TAU 6.2831853f
-#define EPS 0.001f
+#define EPS (0.5/max(u_resolution.x, u_resolution.y)) 
 
 float brushRadius = 0.5f / min(u_resolution.x, u_resolution.y);
 
@@ -27,52 +29,65 @@ float distSquared(vec2 a, vec2 b) {
 }
 
 bool outOfBounds(vec2 uv) {
-    return uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0;
+    return uv.x < 0.0f || uv.x > 1.1f || uv.y < 0.0f || uv.y > 1.1f;
 }
 
-vec4 raymarch() {
-    int rayCount = 64;
+vec4 raymarch(int rayCount, float intervalStart, float intervalEnd, vec2 effectiveUv, bool isLastLayer) {
     int maxSteps = 64;
-
-    vec2 fixedUv = (uv + 1.0f) / 2.0f;
-    vec2 coord = fixedUv * vec2(u_resolution);
-    
-    vec4 light = texture(u_canvasTexture, fixedUv);
-    
-    if (light.a > 0.1) return light;
-
-    float oneOverRayCount = 1.0 / float(rayCount);
+    vec4 radiance = vec4(0.0f);
+    float oneOverRayCount = 1.0f / float(rayCount);
     float tauOverRayCount = TAU * oneOverRayCount;
-    float noise = rand(fixedUv);
-
-    vec4 radiance = vec4(0.0);
 
     for (int i = 0; i < rayCount; i++) {
-        float angle = tauOverRayCount * (float(i) + noise*5.0f);
+        float angle = tauOverRayCount * (float(i) + 0.5f);
         vec2 rayDirection = vec2(cos(angle), -sin(angle));
-
-        vec2 sampleUv = fixedUv;
         
-        for (int step = 1; step < maxSteps; step++) {            
+        vec2 sampleUv = effectiveUv + rayDirection * intervalStart;
+        float traveled = intervalStart;
+
+        for (int step = 1; step < maxSteps; step++) {
             float dist = texture(u_distanceFieldTexture, sampleUv).r;
-            sampleUv += rayDirection * (dist + noise*0.01f);
+            sampleUv += rayDirection * dist;
+            
             if (outOfBounds(sampleUv)) break;
 
-            vec4 sampleLight = texture(u_canvasTexture, sampleUv);
-            if (sampleLight.a > 0.1) {
-                radiance += sampleLight;
+            
+            if (dist < EPS) {
+                vec4 sampleLight = texture(u_canvasTexture, sampleUv);
+                radiance += vec4(pow(sampleLight.rgb, vec3(2.2f)), 1.0f);
                 break;
             }
+
+            traveled += dist;
+            if (traveled >= intervalEnd) break;
         }
     }
+
+    if (isLastLayer) {
+        radiance += texture(u_lastTexture, effectiveUv);
+    }
+
     return radiance * oneOverRayCount;
 }
 
 void main() {
-    if (distSquared(uv, u_mousePos) < brushRadius) {
-        vec2 fixedMousePos = (u_mousePos + 1.0f) / 2.0f;
-        FragColor = vec4(fixedMousePos, 1.0f, 1.0f);
-    }
-    else 
-        FragColor = raymarch();
+    vec2 fixedUv = (uv + 1.0f) / 2.0f;
+
+    vec2 coord = fixedUv * vec2(u_resolution);
+    bool isLastLayer = u_rayCount == u_baseRayCount;
+    vec2 effectiveUv = isLastLayer ? fixedUv : floor(coord / 2.0f) * 2.0f / vec2(u_resolution);
+
+    float partial = 0.125f;
+    float intervalStart = isLastLayer ? 0.0f : partial;
+    float intervalEnd = isLastLayer ? partial : sqrt(2.0f);
+
+    vec4 radiance = vec4(0.0f);
+
+    vec4 canvasColor = texture(u_canvasTexture, fixedUv);
+    if (canvasColor.a > 0.1f) radiance = vec4(pow(canvasColor.rgb, vec3(2.2f)), 1.0f);
+    
+    else radiance = raymarch(u_rayCount, intervalStart, intervalEnd, effectiveUv, isLastLayer);
+
+    vec3 correctSRGB = pow(radiance.rgb, vec3(1.0f / 2.2f));
+    FragColor = vec4(correctSRGB, 1.0f);
 }
