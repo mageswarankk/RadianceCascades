@@ -1,6 +1,7 @@
 ﻿  main.cpp
-C:\Users\mages\Documents\Research\Code\Projects\RadianceCascades\src\main.cpp(251,34): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\mages\Documents\Research\Code\Projects\RadianceCascades\src\main.cpp(251,23): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-C:\Users\mages\Documents\Research\Code\Projects\RadianceCascades\src\main.cpp(307,38): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
-C:\Users\mages\Documents\Research\Code\Projects\RadianceCascades\src\main.cpp(353,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\mages\Documents\Research\Code\Projects\RadianceCascades\src\main.cpp(253,34): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\mages\Documents\Research\Code\Projects\RadianceCascades\src\main.cpp(253,23): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+C:\Users\mages\Documents\Research\Code\Projects\RadianceCascades\src\main.cpp(305,38): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+C:\Users\mages\Documents\Research\Code\Projects\RadianceCascades\src\main.cpp(333,36): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\mages\Documents\Research\Code\Projects\RadianceCascades\src\main.cpp(333,30): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
   RadianceCascades.vcxproj -> C:\Users\mages\Documents\Research\Code\Projects\RadianceCascades\src\x64\Debug\RadianceCascades.exe

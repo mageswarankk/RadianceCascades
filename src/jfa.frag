@@ -1,5 +1,11 @@
 #version 430 core
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+
 in vec2 uv;
 in vec4 color;
 

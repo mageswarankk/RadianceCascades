@@ -1,5 +1,11 @@
 #version 430 core
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+
 in vec2 uv;
 in vec4 color;
 
@@ -11,7 +17,7 @@ uniform vec2 u_lastMousePos;
 uniform int u_mouseClicked;
 uniform sampler2D u_canvasTexture;
 
-float brushRadius = 0.5f / min(u_resolution.x, u_resolution.y);
+float brushRadius = 0.25f / min(u_resolution.x, u_resolution.y);
 
 float distSquared(vec2 a, vec2 b) {
     vec2 d = a - b;
@@ -40,19 +46,18 @@ void main() {
     vec2 fixedUv = ((uv + 1.0f) / 2.0f);
     vec4 current = texture(u_canvasTexture, fixedUv);
 
-    if (u_mouseClicked == 1) {
-        if (sdfLineSquared(uv, u_lastMousePos, u_mousePos) <= brushRadius) {
-            vec2 fixedMousePos = (u_mousePos + 1.0f) / 2.0f;
-            current = vec4(fixedMousePos, 1.0f, 1.0f);
-        }
+    if (u_mouseClicked == 1 && sdfLineSquared(uv, u_lastMousePos, u_mousePos) <= brushRadius) {
+        vec2 fixedMousePos = (u_mousePos + 1.0f) / 2.0f;
+        current = vec4(fixedMousePos, 1.0f, 1.0f);
+        // current = vec4(1.0f);
     }
-    else if (u_mouseClicked == 2) {
-        if (sdfLineSquared(uv, u_lastMousePos, u_mousePos) <= brushRadius) {
-            current = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-        }
+
+    else if (u_mouseClicked == 2 && sdfLineSquared(uv, u_lastMousePos, u_mousePos) <= brushRadius) {
+        current = vec4(0.0f, 0.0f, 0.0f, 1.0f);
     }
+
     else if (current.a < 0.1f && makeGrid(fixedUv)) {
-        current = vec4(vec3(0.0f), 0.0f); // 0.0f alpha temporary
+        current = vec4(vec3(0.0f), 1.0f); // 0.0f alpha temporary
     }
 
     FragColor = current;

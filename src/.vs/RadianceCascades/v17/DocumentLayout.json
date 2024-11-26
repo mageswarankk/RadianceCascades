@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\rc.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:rc.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\draw.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:draw.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\dist.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:dist.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\rc.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:rc.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -32,37 +32,38 @@
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAMUAAAAAAAAAAAAwwPsAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAGUBAAAAAAAAAAAAAE0BAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-11-19T13:22:44.385Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "rc.frag",
-              "DocumentMoniker": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\rc.frag",
-              "RelativeDocumentMoniker": "rc.frag",
-              "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\rc.frag",
-              "RelativeToolTip": "rc.frag",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAADsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-11-19T22:19:38.528Z",
+              "WhenOpened": "2024-11-25T08:34:12.201Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "dist.frag",
-              "DocumentMoniker": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\dist.frag",
-              "RelativeDocumentMoniker": "dist.frag",
-              "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\dist.frag",
-              "RelativeToolTip": "dist.frag",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAjAAAAAAAAAA==",
+              "Title": "rc.frag",
+              "DocumentMoniker": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\rc.frag",
+              "RelativeDocumentMoniker": "rc.frag",
+              "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\rc.frag",
+              "RelativeToolTip": "rc.frag",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-11-20T05:38:03.496Z",
-              "IsPinned": true
+              "WhenOpened": "2024-11-25T08:50:09.943Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "draw.frag",
+              "DocumentMoniker": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\draw.frag",
+              "RelativeDocumentMoniker": "draw.frag",
+              "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\draw.frag",
+              "RelativeToolTip": "draw.frag",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACcAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-26T20:05:40.2Z",
+              "EditorCaption": ""
             }
           ]
         }

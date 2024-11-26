@@ -12,15 +12,16 @@
 #include"vbo.h"
 #include"ebo.h"
 
-const int WINDOW_WIDTH  = 800;
+const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 800;
 const char* WINDOW_NAME = "Radiance Cascades";
 
 GLfloat vertices[] = {
-	-1.0f, -1.0f, 0.0f,	0.0f, 0.0f, 0.1f, 1.0f,	// 0
-	-1.0f,  1.0f, 0.0f, 0.0f, 0.0f, 0.1f, 1.0f,	// 1
-	 1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.1f, 1.0f,	// 2
-	 1.0f,  1.0f, 0.0f, 0.0f, 0.0f, 0.1f, 1.0f	// 3
+	// positions		// RGBa
+	-1.0f, -1.0f, 0.0f,	0.0f, 1.0f, 0.0f, 1.0f,	// 0
+	-1.0f,  1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,	// 1
+	 1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,	// 2
+	 1.0f,  1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f	// 3
 };
 
 GLuint indices[] = {
@@ -193,12 +194,12 @@ int main() {
 	glGenTextures(2, rcTextures);
 	GLuint rcTexture_A = rcTextures[0];
 	GLuint rcTexture_B = rcTextures[1];
-	
-	glBindFramebuffer(GL_FRAMEBUFFER, rcFBO_A);
-	glActiveTexture(GL_TEXTURE4);
+
 	glBindTexture(GL_TEXTURE_2D, rcTexture_A);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, rcFBO_A);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rcTexture_A, 0);
 	fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
@@ -206,11 +207,11 @@ int main() {
 		std::cout << "Error: RC framebuffer A is not complete!" << std::endl;
 	}
 
-	glBindFramebuffer(GL_FRAMEBUFFER, rcFBO_B);
-	glActiveTexture(GL_TEXTURE5);
 	glBindTexture(GL_TEXTURE_2D, rcTexture_B);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, rcFBO_B);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, WINDOW_WIDTH, WINDOW_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rcTexture_B, 0);
 	fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
@@ -241,7 +242,8 @@ int main() {
 	GLuint u_mousePos_rc = glGetUniformLocation(rcShader.ID, "u_mousePos");
 	GLuint u_mouseClick_rc = glGetUniformLocation(rcShader.ID, "u_mouseClicked");
 	GLuint u_baseRayCount_rc = glGetUniformLocation(rcShader.ID, "u_baseRayCount");
-	GLuint u_rayCount_rc = glGetUniformLocation(rcShader.ID, "u_rayCount");
+	GLuint u_cascadeIndex_rc = glGetUniformLocation(rcShader.ID, "u_cascadeIndex");
+	GLuint u_cascadeCount_rc = glGetUniformLocation(rcShader.ID, "u_cascadeCount");
 	GLuint u_canvasTexture_rc = glGetUniformLocation(rcShader.ID, "u_canvasTexture");
 	GLuint u_distanceFieldTexture_rc = glGetUniformLocation(rcShader.ID, "u_distanceFieldTexture");
 	GLuint u_lastTexture_rc = glGetUniformLocation(rcShader.ID, "u_lastTexture");
@@ -249,7 +251,6 @@ int main() {
 	GLuint u_finalRender_render = glGetUniformLocation(renderShader.ID, "u_finalRender");
 
 	const int jfa_passes = std::ceil(std::log2(std::max(WINDOW_WIDTH, WINDOW_HEIGHT))); // for jfa
-	const int baseRayCount = 16; // for rc
 
 	// BEGIN of main render loop
 	while (!glfwWindowShouldClose(window)) {
@@ -275,8 +276,6 @@ int main() {
 		// PASS 2: Render UV map to serve as seed input for the Jump Flood Algorithm
 		glBindTexture(GL_TEXTURE_2D, uvMapTexture);
 		glBindFramebuffer(GL_FRAMEBUFFER, uvMapFBO);
-
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		uvShader.activateShader();
@@ -291,8 +290,7 @@ int main() {
 		// PASS 3: Run the Jump Flood Algorithm to generate a distance UV map
 		glBindTexture(GL_TEXTURE_2D, jfaTexture);
 		glBindFramebuffer(GL_FRAMEBUFFER, jfaFBO_A);
-		
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		jfaShader.activateShader();
@@ -316,12 +314,10 @@ int main() {
 			currentInput = 2; // jfaTexture
 			std::swap(currentJfaFBO, lastJfaFBO);
 		}
-		
+
 		// PASS 4: Create distance field from the output of the Jump Flood Algorithm
 		glBindTexture(GL_TEXTURE_2D, distanceFieldTexture);
 		glBindFramebuffer(GL_FRAMEBUFFER, distanceFieldFBO);
-		
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		distShader.activateShader();
@@ -333,11 +329,14 @@ int main() {
 		VAO.unbindVAO();
 
 		// PASS 5: Radiance Cascade implementation
-		glBindTexture(GL_TEXTURE_2D, rcTextures[0]);
-		glBindFramebuffer(GL_FRAMEBUFFER, rcFramebuffers[0]);
-		
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		const int baseRayCount = 4;
+		const float diagonalLength = sqrt(WINDOW_WIDTH * WINDOW_WIDTH + WINDOW_HEIGHT * WINDOW_HEIGHT);
+		const int cascadeCount = int(ceil(log(diagonalLength) / log(baseRayCount))) + 1;
+
+		GLuint currTexture	= rcTexture_A;
+		GLuint lastTexture	= rcTexture_B;
+		GLuint currFBO = rcFBO_A;
+		GLuint lastFBO = rcFBO_B;
 
 		rcShader.activateShader();
 
@@ -345,58 +344,42 @@ int main() {
 		glUniform2f(u_mousePos_rc, mouseX, mouseY);
 		glUniform1i(u_mouseClick_rc, mouseClicked);
 		glUniform1i(u_baseRayCount_rc, baseRayCount);
+		glUniform1i(u_cascadeCount_rc, cascadeCount);
 		glUniform1i(u_canvasTexture_rc, 0);
 		glUniform1i(u_distanceFieldTexture_rc, 3);
 
 		int prev = 0;
-		for (int i = 2; i >= 1; i--) {
-			int rayCount = std::pow(baseRayCount, i);
-			glUniform1i(u_rayCount_rc, rayCount);
+		for (int i = cascadeCount; i >= 0; i--) {
+			glUniform1i(u_cascadeIndex_rc, i);
 
-			if (i > 1) {
-				glBindTexture(GL_TEXTURE_2D, rcTextures[prev]);
+			if (i > 0) {
 				glBindFramebuffer(GL_FRAMEBUFFER, rcFramebuffers[prev]);
-
-				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 				glClear(GL_COLOR_BUFFER_BIT);
+
+				glActiveTexture(GL_TEXTURE4);
+				glBindTexture(GL_TEXTURE_2D, rcTextures[1- prev]);
+				glUniform1i(u_lastTexture_rc, 4);
 
 				VAO.bindVAO();
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 				VAO.unbindVAO();
 
-				glUniform1i(u_lastTexture_rc, (prev == 0 ? 4 : 5));
 				prev = 1 - prev;
 			}
 
 			else {
-				glBindTexture(GL_TEXTURE_2D, 0);
-				glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+				glBindFramebuffer(GL_FRAMEBUFFER, 0);  
 				glClear(GL_COLOR_BUFFER_BIT);
+
+				glActiveTexture(GL_TEXTURE4);
+				glBindTexture(GL_TEXTURE_2D, rcTextures[1-prev]);
+				glUniform1i(u_lastTexture_rc, 4);
 
 				VAO.bindVAO();
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 				VAO.unbindVAO();
 			}
 		}
-
-		// PASS 6: Final render 
-		// glBindTexture(GL_TEXTURE_2D, 0);
-		// glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		//
-		// glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		// glClear(GL_COLOR_BUFFER_BIT);
-
-		// renderShader.activateShader();
-
-		// glUniform1i(u_finalRender_render, 4);
-
-		// VAO.bindVAO();
-		// glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		// VAO.unbindVAO();
-
-		// END of render loop
 
 		lastMouseX = mouseX;
 		lastMouseY = mouseY;
