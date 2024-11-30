@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\rc.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:rc.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\render.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:render.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\draw.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:draw.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
@@ -11,8 +19,8 @@
       "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\rc.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:rc.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\render.vert||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B4B8CCD0-3554-4532-ABC0-B25B87CC962F}|RadianceCascades.vcxproj|solutionrelative:render.vert||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,17 +30,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAGUBAAAAAAAAAAAAAE0BAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-25T08:34:12.201Z",
               "IsPinned": true,
@@ -40,13 +48,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "rc.frag",
               "DocumentMoniker": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\rc.frag",
               "RelativeDocumentMoniker": "rc.frag",
               "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\rc.frag",
               "RelativeToolTip": "rc.frag",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2024-11-25T08:50:09.943Z",
               "IsPinned": true,
@@ -54,13 +62,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "render.vert",
+              "DocumentMoniker": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\render.vert",
+              "RelativeDocumentMoniker": "render.vert",
+              "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\render.vert",
+              "RelativeToolTip": "render.vert",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-30T08:59:42.01Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "render.frag",
+              "DocumentMoniker": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\render.frag",
+              "RelativeDocumentMoniker": "render.frag",
+              "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\render.frag",
+              "RelativeToolTip": "render.frag",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-30T08:59:33.025Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "draw.frag",
               "DocumentMoniker": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\draw.frag",
               "RelativeDocumentMoniker": "draw.frag",
               "ToolTip": "C:\\Users\\mages\\Documents\\Research\\Code\\Projects\\RadianceCascades\\src\\draw.frag",
               "RelativeToolTip": "draw.frag",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAADsAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAADwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2024-11-26T20:05:40.2Z",
               "EditorCaption": ""

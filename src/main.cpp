@@ -12,16 +12,16 @@
 #include"vbo.h"
 #include"ebo.h"
 
-const int WINDOW_WIDTH = 800;
+const int WINDOW_WIDTH  = 800;
 const int WINDOW_HEIGHT = 800;
 const char* WINDOW_NAME = "Radiance Cascades";
 
 GLfloat vertices[] = {
 	// positions		// RGBa
-	-1.0f, -1.0f, 0.0f,	0.0f, 1.0f, 0.0f, 1.0f,	// 0
-	-1.0f,  1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,	// 1
-	 1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,	// 2
-	 1.0f,  1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f	// 3
+	-1.0f, -1.0f, 0.0f,	0.0f, 1.0f, 0.5f, 0.0f,	// 0
+	-1.0f,  1.0f, 0.0f, 0.0f, 1.0f, 0.5f, 0.0f,	// 1
+	 1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.5f, 0.0f,	// 2
+	 1.0f,  1.0f, 0.0f, 0.0f, 1.0f, 0.5f, 0.0f	// 3
 };
 
 GLuint indices[] = {
@@ -259,7 +259,6 @@ int main() {
 		// PASS 1: Render brush strokes to canvas texture
 		glBindTexture(GL_TEXTURE_2D, canvasTexture);
 		glBindFramebuffer(GL_FRAMEBUFFER, canvasFBO);
-		// We do not clear the buffer since we want to accumulate pixels on the canvas texture!
 
 		drawShader.activateShader();
 
@@ -329,7 +328,7 @@ int main() {
 		VAO.unbindVAO();
 
 		// PASS 5: Radiance Cascade implementation
-		const int baseRayCount = 4;
+		const int baseRayCount = 16;
 		const float diagonalLength = sqrt(WINDOW_WIDTH * WINDOW_WIDTH + WINDOW_HEIGHT * WINDOW_HEIGHT);
 		const int cascadeCount = int(ceil(log(diagonalLength) / log(baseRayCount))) + 1;
 

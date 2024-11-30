@@ -1,3 +1,5 @@
+// Not in use right now
+
 #version 430 core
 
 #ifdef GL_FRAGMENT_PRECISION_HIGH

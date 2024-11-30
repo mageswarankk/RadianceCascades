@@ -49,7 +49,6 @@ void main() {
     if (u_mouseClicked == 1 && sdfLineSquared(uv, u_lastMousePos, u_mousePos) <= brushRadius) {
         vec2 fixedMousePos = (u_mousePos + 1.0f) / 2.0f;
         current = vec4(fixedMousePos, 1.0f, 1.0f);
-        // current = vec4(1.0f);
     }
 
     else if (u_mouseClicked == 2 && sdfLineSquared(uv, u_lastMousePos, u_mousePos) <= brushRadius) {
@@ -57,7 +56,8 @@ void main() {
     }
 
     else if (current.a < 0.1f && makeGrid(fixedUv)) {
-        current = vec4(vec3(0.0f), 1.0f); // 0.0f alpha temporary
+        float makeGrid = 1.0; // make 1.0 to enable grid
+        current = vec4(vec3(0.0f), makeGrid);
     }
 
     FragColor = current;

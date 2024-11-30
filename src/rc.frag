@@ -24,7 +24,7 @@ uniform sampler2D u_lastTexture;
 
 #define PI 3.1415926f
 #define TAU 2.0f * PI
-#define srgb 1.0f
+#define srgb 1.0f // make 2.2 to enable correct srgb (will reveal artifacts)
 
 float brushRadius = 0.25f / min(u_resolution.x, u_resolution.y);
 
@@ -63,8 +63,8 @@ vec4 raymarch() {
     float shortestSide      = min(u_resolution.x, u_resolution.y);
     vec2  scale             = shortestSide / u_resolution;
 
-    float intervalStart     = u_cascadeIndex == 0 ? 0.0f : pow(u_baseRayCount, u_cascadeIndex - 1.0f) / shortestSide;
-    float intervalLength    = pow(u_baseRayCount, u_cascadeIndex) / shortestSide;
+    float intervalStart     = u_cascadeIndex == 0 ? 0.0f : pow(u_baseRayCount, u_cascadeIndex - 1.0f) / shortestSide * 5;
+    float intervalLength    = pow(u_baseRayCount, u_cascadeIndex) / shortestSide * 5;
 
     for (int i = 0; i < u_baseRayCount; i++) {
         float index         = baseIndex + float(i);
@@ -100,9 +100,7 @@ vec4 raymarch() {
             vec2  offset        = (probeRelativePos + 0.5f) / sqrtBase;
             vec2  clampedOffset = clamp(offset, vec2(0.5f), upperSize - 0.5f);
             vec2  upperUv       = (upperPosition + clampedOffset) / u_resolution;
-            
-            vec4  color         = texture(u_lastTexture, upperUv);            
-            radDelta += color;
+            radDelta += texture(u_lastTexture, upperUv);
         }
         
         radiance += radDelta;
